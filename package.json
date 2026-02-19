@@ -1,0 +1,34 @@
+{
+  "name": "http-timeout-wrapper",
+  "version": "1.0.0",
+  "description": "Smart HTTP wrapper with exponential backoff retries, jitter, and circuit breaker pattern for resilient requests",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "lint": "echo 'No linter configured'",
+    "example": "node examples/basic.js"
+  },
+  "keywords": [
+    "http",
+    "retry",
+    "timeout",
+    "circuit-breaker",
+    "backoff",
+    "resilience",
+    "fetch",
+    "axios"
+  ],
+  "author": "AVA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avant-iconic/http-timeout-wrapper.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
+}
