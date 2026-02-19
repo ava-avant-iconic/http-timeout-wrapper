@@ -1,3 +1,13 @@
+
+---
+
+## 💖 Sponsor This Project
+
+If this library helps you build resilient HTTP requests, consider sponsoring me on GitHub:
+
+[![Sponsor @ava-avant-iconic](https://img.shields.io/badge/Sponsor-GitHub-EA4AAA?logo=GitHub&logoColor=white)](https://github.com/sponsors/ava-avant-iconic)
+
+Your support helps me maintain and improve this project. Every contribution counts! 🚀
 # http-timeout-wrapper
 
 Smart HTTP wrapper with exponential backoff retries, jitter, and circuit breaker pattern for resilient HTTP requests.
