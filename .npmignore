@@ -1,0 +1,36 @@
+# Tests
+test/
+*.test.js
+
+# Examples
+examples/
+
+# CI/CD
+.github/
+
+# Documentation (README.md is included)
+*.md
+!README.md
+
+# Development files
+.gitignore
+.gitattributes
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts (if any)
+dist/
+build/
+
+# Coverage
+coverage/
+.nyc_output/

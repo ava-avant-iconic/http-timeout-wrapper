@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "prepublishOnly": "npm test",
+    "example": "node examples/basic.js",
     "lint": "echo 'No linter configured'",
-    "example": "node examples/basic.js"
+    "dry-run": "npm pack --dry-run"
   },
   "keywords": [
     "http",
@@ -17,13 +20,29 @@
     "backoff",
     "resilience",
     "fetch",
-    "axios"
+    "exponential-backoff",
+    "jitter",
+    "fault-tolerance",
+    "retries",
+    "http-client"
   ],
   "author": "AVA",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/avant-iconic/http-timeout-wrapper.git"
+    "url": "https://github.com/ava-avant-iconic/http-timeout-wrapper.git"
+  },
+  "homepage": "https://github.com/ava-avant-iconic/http-timeout-wrapper#readme",
+  "bugs": {
+    "url": "https://github.com/ava-avant-iconic/http-timeout-wrapper/issues"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=18.0.0"
