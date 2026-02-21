@@ -4,6 +4,9 @@
   "description": "Smart HTTP wrapper with exponential backoff retries, jitter, and circuit breaker pattern for resilient requests",
   "main": "src/index.js",
   "type": "module",
+  "bin": {
+    "http-timeout-wrapper": "./src/cli.js"
+  },
   "scripts": {
     "test": "node --test",
     "test:coverage": "node --test --experimental-test-coverage",
@@ -46,6 +49,9 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0"

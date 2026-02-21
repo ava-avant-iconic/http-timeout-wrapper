@@ -3,7 +3,7 @@
  * Smart HTTP requests with exponential backoff retries, jitter, and circuit breaker.
  */
 
-import { setTimeout } from 'timers/promises';
+import { setTimeout as sleep } from 'timers/promises';
 
 // Default configuration
 const DEFAULT_CONFIG = {
@@ -226,7 +226,7 @@ class HttpWrapper {
           // Calculate delay and wait
           const delay = calculateDelay(attempt, baseDelay, maxDelay, jitter);
           onRetry?.(attempt + 1, error);
-          await setTimeout(delay);
+          await sleep(delay);
         }
       }
 

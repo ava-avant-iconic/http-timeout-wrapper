@@ -31,6 +31,20 @@ Smart HTTP wrapper with exponential backoff retries, jitter, and circuit breaker
 npm install http-timeout-wrapper
 ```
 
+### CLI Installation
+
+Install globally to use the CLI:
+
+```bash
+npm install -g http-timeout-wrapper
+```
+
+Or use directly with npx:
+
+```bash
+npx http-timeout-wrapper <command>
+```
+
 ## Quick Start
 
 ```javascript
@@ -231,6 +245,155 @@ try {
     console.log('Other error:', error.message);
   }
 }
+```
+
+## CLI Usage
+
+The package includes a command-line interface for making HTTP requests with retry logic and circuit breaker.
+
+### Installation
+
+```bash
+npm install -g http-timeout-wrapper
+```
+
+### Basic Usage
+
+```bash
+# GET request
+http-timeout-wrapper get https://api.example.com/users
+
+# POST request with JSON data
+http-timeout-wrapper post https://api.example.com/users -d '{"name":"John","email":"john@example.com"}'
+
+# PUT request
+http-timeout-wrapper put https://api.example.com/users/1 -d '{"name":"Jane"}'
+
+# DELETE request
+http-timeout-wrapper delete https://api.example.com/users/1
+
+# PATCH request
+http-timeout-wrapper patch https://api.example.com/users/1 -d '{"email":"jane@example.com"}'
+```
+
+### Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-H, --header <header>` | Add header (format: "Name: Value") | - |
+| `-d, --data <data>` | Request body (JSON string) | - |
+| `-f, --file <file>` | Read request body from file | - |
+| `-r, --max-retries <number>` | Maximum number of retries | 3 |
+| `-t, --timeout <ms>` | Request timeout in ms | 30000 |
+| `-b, --base-delay <ms>` | Base delay for exponential backoff (ms) | 1000 |
+| `-d, --max-delay <ms>` | Maximum delay cap (ms) | 30000 |
+| `--no-jitter` | Disable jitter | enabled |
+| `--no-circuit-breaker` | Disable circuit breaker | enabled |
+| `--failure-threshold <number>` | Circuit breaker failure threshold | 5 |
+| `--success-threshold <number>` | Circuit breaker success threshold | 2 |
+| `--circuit-timeout <ms>` | Circuit breaker half-open timeout (ms) | 60000 |
+| `-o, --output <file>` | Output to file instead of stdout | stdout |
+| `-q, --quiet` | Suppress retry messages | false |
+| `-v, --verbose` | Verbose output | false |
+
+### Examples
+
+#### Add Headers
+
+```bash
+http-timeout-wrapper get https://api.example.com/data \
+  -H "Authorization: Bearer token123" \
+  -H "X-Custom-Header: value"
+```
+
+#### Custom Retry Configuration
+
+```bash
+http-timeout-wrapper get https://api.example.com/data \
+  --max-retries 5 \
+  --timeout 60000 \
+  --base-delay 2000
+```
+
+#### Verbose Output
+
+```bash
+http-timeout-wrapper get https://api.example.com/data -v
+```
+
+Output:
+```
+📡 GET https://api.example.com/data
+⏱️  Duration: 234ms
+📊 Status: 200 OK
+🏷️  Content-Type: application/json
+🔌 Circuit Breaker: closed
+
+{
+  "data": { ... }
+}
+```
+
+#### Quiet Mode
+
+```bash
+http-timeout-wrapper get https://api.example.com/data -q
+```
+
+Suppresses retry messages and circuit breaker notifications.
+
+#### Save Output to File
+
+```bash
+http-timeout-wrapper get https://api.example.com/data -o response.json
+```
+
+#### Disable Circuit Breaker
+
+```bash
+http-timeout-wrapper get https://api.example.com/data --no-circuit-breaker
+```
+
+#### POST from File
+
+```bash
+# data.json
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+
+# CLI command
+http-timeout-wrapper post https://api.example.com/users -f data.json
+```
+
+### Custom Circuit Breaker Settings
+
+```bash
+http-timeout-wrapper get https://api.example.com/data \
+  --failure-threshold 10 \
+  --success-threshold 3 \
+  --circuit-timeout 120000
+```
+
+### Error Codes
+
+| Exit Code | Meaning |
+|-----------|---------|
+| 0 | Success |
+| 1 | Request failed or circuit breaker open |
+
+### CI/CD Usage
+
+```bash
+# Exit with error if request fails
+http-timeout-wrapper get https://api.example.com/health || exit 1
+
+# Use in GitHub Actions
+- name: Check API health
+  run: |
+    npm install -g http-timeout-wrapper
+    http-timeout-wrapper get https://api.example.com/health
 ```
 
 ## API Reference
